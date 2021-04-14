@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <table id="myTable" border="1" width="70%" >
+    <!-- <thead>
+      <tr>
+        <th data-resizable-column-id="a"><input type="checkbox" /></th>
+        <th data-resizable-column-id="b">栏目类型 </th>
+        <th data-resizable-column-id="c">活动名称 </th>
+        <th data-resizable-column-id="d">状态 </th>
+        <th data-resizable-column-id="e">操作选项</th>
+      </tr>
+    </thead> -->
+    <tbody>
+      <tr>
+        <td><input type="checkbox" /></td>
+        <td>青春日记</td>
+        <td>2014年度青春日记征文 </td>
+        <td>提交 </td>
+        <td>审核</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" /></td>
+        <td>我和孩子的成长故事</td>
+        <td>成长故事 </td>
+        <td>通过 </td>
+        <td>审核</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<script src="jquery.min.js"></script>
+<script src="colResizable-1.6.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  $("#myTable").colResizable({
+    liveDrag: true, //实时显示滑动位置
+    gripInnerHtml: "<div class='grip'></div>",
+    postbackSafe: true, //刷新后保留之前的拖拽宽度
+  });
+  alert(1112)
+})
+</script>
+</body>
+</html>

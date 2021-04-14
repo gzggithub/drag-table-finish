@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        const letters = [
+            'A', 'B', 'C', 'D', 'E', 'F', 'G',
+            'H', 'I', 'J', 'K', 'L', 'M', 'N',
+            'O', 'P', 'Q', 'R', 'S', 'T',
+            'U', 'V', 'W', 'X', 'Y', 'Z',
+            '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        ];
+
+        const transformNumToLetter = function (num) {
+            let letter = "";
+            let loopNum = parseInt(num / 35);
+            if(loopNum > 0){
+                letter += transformNumToLetter(loopNum-1);
+            }
+            letter += letters[num % 35];
+            return letter;
+        };
+        for (var i = 0; i <= 999; i++) {
+            console.log(transformNumToLetter(i))
+        }
+        console.log(transformNumToLetter(0))
+        console.log(transformNumToLetter(1))
+        console.log(transformNumToLetter(2))
+        console.log(transformNumToLetter(696))
+        console.log(transformNumToLetter(697))
+        console.log(transformNumToLetter(698))
+        console.log(transformNumToLetter(699))
+        console.log(transformNumToLetter(700))
+        console.log(transformNumToLetter(701))
+
+        console.log(transformNumToLetter(997))
+        console.log(transformNumToLetter(998))
+        console.log(transformNumToLetter(999))
+    </script>
+
+</body>
+</html>

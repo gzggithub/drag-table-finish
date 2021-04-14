@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css"></style>
+</head>
+<body>
+
+<script type="text/javascript">
+	// console.log(Number(22222222222222333333))
+	// alert()
+
+    // var str = "XXX2938" // 字符串由4位数字和若干字母组成
+    // var num = str.substring(str, str.length() - 4, str.length() - 1) // 从后向前截取字符串中的数字串
+    // var num = num + 1
+    // str = str.substring(str, 1 , str.length() - 4) + num
+    // console.log(num)
+    // console.log(str)
+
+    var i = 100
+    var arg = []
+    var oldnum = 'aa0001'
+    for (var j=1; j<i; j++) {
+        arg.push(oldnum.substr(0, oldnum.length - 1) + j)
+    }
+    // alert(arg)
+    console.log(arg)
+
+    main()
+    // 用1--9加A--Z混合编码  使用ASCII码判断
+    /**
+     * 用1--9加A--Z混合编码  使用ASCII码判断
+     * LYL
+     * 打印所有的
+     */
+
+    function main(args) {
+        var string = "00AA"
+        a = string.split(",")
+        if (a[3]==57){
+            a[3]+=8;
+        }else if (a[3]<90){
+            a[3]++;
+        } else {
+            if (a[2]==57){
+                a[2]+=8;
+                a[3]=48;
+            }else if (a[2]<90) {
+                a[2]++;
+                a[3] = 48;
+            }else {
+                if (a[1]==57){
+                    a[1]+=8;
+                    a[2]=48;
+                    a[3]=48;
+                }else if (a[1]<90){
+                    a[1]++;
+                    a[2]=48;
+                    a[3]=48;
+                }else {
+                    if (a[0]==57) {
+                        a[0] += 8;
+                        a[1] = 48;
+                        a[2] = 48;
+                        a[3] = 48;
+                    }else if (a[0]<90){
+                        a[0] ++;
+                        a[1] = 48;
+                        a[2] = 48;
+                        a[3] = 48;
+                    }else {
+                        alert("编码用完了")
+                    }
+                }
+            }
+        }
+        var sbu = []
+        console.log(a)
+        console.log(a.length)
+        for (var i = 0; i < a.length; i++) {
+            sbu.push(a[i])
+        }
+        
+        console.log(sbu.join())
+        return sbu.join()
+    }
+
+
+    /**
+    * 获取Asc码
+    * @param st
+    * @return
+    */
+    function getAscNum(str) {
+        // str.charCodeAt();  // 65
+        // String.fromCharCode(num);  // 'a'
+        return str.charCodeAt();
+    }  
+  
+    /** 
+     * ASC转字符 
+     *  
+     * @param backnum 
+     * @return 
+     */  
+    function getNumAsc(num) {
+        return String.fromCharCode(num)
+    }  
+     
+    //主方法
+    function getNextCashNumber(number) {
+        if (StringUtil.isEmpty(number)) {
+            return "9A";
+        }
+        var pre = number.replaceAll("[^a-zA-Z]", "");// 获取字母部分
+        var counterStr = number.replaceAll("[^0-9]", "");
+        // 字符 + 数字
+        if (!StringUtil.isEmpty(counterStr)) {
+            int counter = parseInt(counterStr);// 获取数字部分
+            counter++;
+            var checkMap = CheckNumGreaterMax(pre, counter);
+            if (!checkMap.success) {
+                counterStr = checkMap.counterStr.toString();
+                return pre + counterStr;
+            }
+            // A999->AB01
+            pre = letterCounter(pre);
+            if (pre.length() > 4) {
+                return "";
+            }
+            if (pre.length() < 4) {
+                pre += String.format("%0" + (4 - pre.length) + "d", 1);
+            }
+            return pre;
+        }
+        var str = letterCounter(pre);
+        return str;
+    }
+     
+    /**
+    * 字母自增
+    * @param str
+    * @return
+    */
+
+    console.log(letterCounter('0A'))
+    function letterCounter(str) {
+        var len = str.length;
+        var startI = len - 1;
+        var tempA = "";
+        var tempB = "";
+        while (true) {
+            tempA = "";
+            if (startI > 0) {
+                tempA = str.substring(0, startI);
+            }
+            if (startI < 0 && len == 0) {
+                tempA = str;
+                tempB = "A";
+                break;
+            } else {
+                tempB = str.substring(startI, len);
+                int lastCode = getAscNum(tempB);
+                lastCode++;
+                if (lastCode <= 90) {
+                    tempB = getNumAsc(lastCode);
+                    break;
+                }
+            startI--;
+            len--;
+            }
+        }
+         
+        var newStr = tempA + tempB;
+        while (newStr.length < str.length) {
+            newStr += "A";
+        }
+        return newStr;
+    }
+     
+    // 检查数字计数器是否超额
+    function CheckNumGreaterMax(pre, counter) {
+        var preL = pre.length
+        var maxConter = 0;
+        var str = "";
+        switch (preL) {
+            case 1:
+                maxConter = 999;
+                str = String.format("%03d", counter);
+                break;
+            case 2:
+                maxConter = 99;
+                str = String.format("%02d", counter);
+                break;
+            case 3:
+                maxConter = 9;
+                str = String.format("%01d", counter);
+                break;
+        }
+        var map = {};
+        if (counter > maxConter) {
+            map.success = true
+        } else {
+            map.success = false
+            map.counterStr = str
+        }
+        return map;
+    }
+</script>
+
+</body>
+</html>
